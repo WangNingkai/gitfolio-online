@@ -66,3 +66,5 @@ dist/
 # Editor files and folders
 .vscode/
 .idea/
+
+.vercel

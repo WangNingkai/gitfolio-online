@@ -1,28 +1,29 @@
+const path = require("path");
 const jsdom = require("jsdom").JSDOM,
   options = {
     resources: "usable",
   };
+const dir = path.resolve(__dirname, "..");
 const renderInfo = (info, args = {}) => {
   const { includeFork, twitter, linkedin, medium, dribbble, theme } = args;
-  jsdom
-    .fromFile(`${__dirname}/assets/index.html`, options)
-    .then(function (dom) {
-      let window = dom.window,
-        document = window.document;
-      try {
-        const user = info;
-        const repos = user.repositories.nodes;
-        for (var i = 0; i < repos.length; i++) {
-          let element;
-          if (repos[i].isFork == false) {
-            element = document.getElementById("work_section");
-          } else if (includeFork == true) {
-            document.getElementById("forks").style.display = "block";
-            element = document.getElementById("forks_section");
-          } else {
-            continue;
-          }
-          element.innerHTML += `
+  console.log(info);
+  jsdom.fromFile(`${dir}/assets/index.html`, options).then(function (dom) {
+    let window = dom.window,
+      document = window.document;
+    try {
+      const user = info;
+      const repos = user.repositories.nodes;
+      for (var i = 0; i < repos.length; i++) {
+        let element;
+        if (repos[i].isFork == false) {
+          element = document.getElementById("work_section");
+        } else if (includeFork == true) {
+          document.getElementById("forks").style.display = "block";
+          element = document.getElementById("forks_section");
+        } else {
+          continue;
+        }
+        element.innerHTML += `
                         <a href="${repos[i].url}" target="_blank">
                         <section>
                             <div class="section_title">${repos[i].name}</div>
@@ -39,8 +40,8 @@ const renderInfo = (info, args = {}) => {
                                     ? "none"
                                     : "inline-block"
                                 };"><i class="fas fa-code"></i>&nbsp; ${
-            repos[i].language.name
-          }</span>
+          repos[i].language.name
+        }</span>
                                 <span><i class="fas fa-star"></i>&nbsp; ${
                                   repos[i].stargazers.totalCount
                                 }</span>
@@ -50,30 +51,30 @@ const renderInfo = (info, args = {}) => {
                             </div>
                         </section>
                         </a>`;
-        }
-        document.title = user.login;
-        theme = `/assets/themes/${theme}.css`;
-        var style = document.createElement("link");
-        style.setAttribute("rel", "stylesheet");
-        style.setAttribute("href", theme);
+      }
+      document.title = user.login;
+      theme = `/assets/themes/${theme}.css`;
+      var style = document.createElement("link");
+      style.setAttribute("rel", "stylesheet");
+      style.setAttribute("href", theme);
 
-        var icon = document.createElement("link");
-        icon.setAttribute("rel", "icon");
-        icon.setAttribute("href", user.avatarUrl);
-        icon.setAttribute("type", "image/png");
+      var icon = document.createElement("link");
+      icon.setAttribute("rel", "icon");
+      icon.setAttribute("href", user.avatarUrl);
+      icon.setAttribute("type", "image/png");
 
-        document.getElementsByTagName("head")[0].appendChild(icon);
-        document.getElementById(
-          "profile_img"
-        ).style.background = `url('${user.avatarUrl}') center center`;
-        document.getElementById("username").innerHTML = `<span style="display:${
-          user.name == null || !user.name ? "none" : "block"
-        };">${user.name}</span><a href="${user.url}">@${user.login}</a>`;
-        //document.getElementById("github_link").href = `https://github.com/${user.login}`;
-        document.getElementById("userbio").innerHTML = user.bioHTML;
-        document.getElementById("userbio").style.display =
-          user.bio == null || !user.bioHTML ? "none" : "block";
-        document.getElementById("about").innerHTML = `
+      document.getElementsByTagName("head")[0].appendChild(icon);
+      document.getElementById(
+        "profile_img"
+      ).style.background = `url('${user.avatarUrl}') center center`;
+      document.getElementById("username").innerHTML = `<span style="display:${
+        user.name == null || !user.name ? "none" : "block"
+      };">${user.name}</span><a href="${user.url}">@${user.login}</a>`;
+      //document.getElementById("github_link").href = `https://github.com/${user.login}`;
+      document.getElementById("userbio").innerHTML = user.bioHTML;
+      document.getElementById("userbio").style.display =
+        user.bio == null || !user.bioHTML ? "none" : "block";
+      document.getElementById("about").innerHTML = `
                 <span style="display:${
                   user.company == null || !user.company ? "none" : "block"
                 };"><i class="fas fa-users"></i> &nbsp; ${user.company}</span>
@@ -83,13 +84,13 @@ const renderInfo = (info, args = {}) => {
                 <span style="display:${
                   user.blog == null || !user.blog ? "none" : "block"
                 };"><i class="fas fa-link"></i> &nbsp; <a href="${user.blog}">${
-          user.blog
-        }</a></span>
+        user.blog
+      }</a></span>
                 <span style="display:${
                   user.location == null || !user.location ? "none" : "block"
                 };"><i class="fas fa-map-marker-alt"></i> &nbsp;&nbsp; ${
-          user.location
-        }</span>
+        user.location
+      }</span>
                 <span style="display:${
                   user.isHireable == false || !user.isHireable
                     ? "none"
@@ -110,13 +111,14 @@ const renderInfo = (info, args = {}) => {
                 };"><a href="https://www.medium.com/@${medium}/" target="_blank" class="socials"><i class="fab fa-medium-m"></i></a></span>
                 </div>
                 `;
-        const content =
-          "<!DOCTYPE html>" + window.document.documentElement.outerHTML;
-        return content;
-      } catch (error) {
-        console.log(error);
-        return "";
-      }
-    });
+      const content =
+        "<!DOCTYPE html>" + window.document.documentElement.outerHTML;
+      console.log(window.document.documentElement.outerHTML);
+      return content;
+    } catch (error) {
+      console.log(error);
+      return "";
+    }
+  });
 };
 module.exports = renderInfo;

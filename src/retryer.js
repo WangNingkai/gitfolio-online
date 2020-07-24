@@ -6,7 +6,6 @@ const retryer = async (fetcher, variables, retries = 0) => {
   }
   try {
     logger.log(`Trying PAT_${retries + 1}`);
-
     // try to fetch with the first token since RETRIES is 0 index i'm adding +1
     let response = await fetcher(
       variables,
