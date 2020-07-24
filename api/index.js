@@ -1,4 +1,3 @@
-require("dotenv").config();
 const fetchInfo = require("../src/fetch");
 const renderInfo = require("../src/render");
 module.exports = async (req, res) => {

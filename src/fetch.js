@@ -1,6 +1,5 @@
 const { request, logger } = require("./utils");
 const retryer = require("./retryer");
-require("dotenv").config();
 
 const fetcher = (variables, token) => {
   return request(
