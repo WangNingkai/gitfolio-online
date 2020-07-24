@@ -1,0 +1,34 @@
+{
+  "name": "gitfolio-oneline",
+  "version": "1.0.0",
+  "description": "a portfolio website for everyone to showcase their work",
+  "main": "index.js",
+  "author": {
+    "name": "@wangningkai and community",
+    "email": "i@ningkai.wang",
+    "url": "https://wangningkai.github.io"
+  },
+  "bugs": "https://github.com/wangningkai/gitfolio-online/issues",
+  "homepage": "https://github.com/wangningkai/gitfolio-online",
+  "keywords": [
+    "personal-website",
+    "github",
+    "portfolio",
+    "portfolio website",
+    "blog website",
+    "blog",
+    "gitfolio",
+    "git"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wangningkai/gitfolio-online"
+  },
+  "license": "GPL-3.0",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "axios": "^0.19.2",
+    "handlebars": "^4.1.2",
+    "jsdom": "^15.1.0"
+  }
+}
