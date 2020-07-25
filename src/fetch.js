@@ -16,6 +16,7 @@ const fetcher = (variables, token) => {
           totalCount
         }
         description
+        shortDescriptionHTML
         primaryLanguage {
           color
           id

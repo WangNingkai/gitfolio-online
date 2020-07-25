@@ -28,8 +28,8 @@ const renderInfo = (info, args = {}) => {
         <section>
             <div class="section_title">${repos[i].name}</div>
             <div class="about_section">
-            <span style="display:${repos[i].description == undefined ? 'none' : 'block'};">${
-          repos[i].description
+            <span style="display:${repos[i].shortDescriptionHTML == undefined ? 'none' : 'block'};">${
+          repos[i].shortDescriptionHTML
         }</span>
             </div>
             <div class="bottom_section">
