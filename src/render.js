@@ -1,7 +1,4 @@
 const path = require('path')
-const bluebird = require('bluebird')
-const hbs = require('handlebars')
-const fs = bluebird.promisifyAll(require('fs'))
 const jsdom = require('jsdom').JSDOM,
   options = {
     resources: 'usable',
@@ -49,13 +46,6 @@ const renderInfo = (info, args = {}) => {
 
       document.title = user.login
       themeFile = `/assets/themes/${theme}.css`
-
-      // let themeSource = fs.readFileSync(`${dir}/assets/themes/${theme}.css`)
-      // themeSource = themeSource.toString('utf-8')
-      // let themeTemplate = hbs.compile(themeSource)
-      // let styles = themeTemplate({
-      //   background: `${background}`,
-      // })
 
       let style = document.createElement('link')
       style.setAttribute('rel', 'stylesheet')
