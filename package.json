@@ -26,7 +26,6 @@
   },
   "license": "GPL-3.0",
   "dependencies": {
-    "axios": "^0.19.2",
-    "jsdom": "^15.1.0"
+    "axios": "^0.19.2"
   }
 }
