@@ -1,9 +1,12 @@
 {
-  "name": "gitfolio-oneline",
-  "routes": [
-    {
-      "src": "/",
-      "dest": "/api/index.js"
-    }
-  ]
+    "name": "gitfolio-oneline",
+    "routes": [{
+            "src": "/",
+            "dest": "/api/index.js"
+        },
+        {
+            "src": "/user/(?<username>[^/]*)",
+            "dest": "/api/index.js?username=$username"
+        }
+    ]
 }
