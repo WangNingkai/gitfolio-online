@@ -1,4 +1,4 @@
-<img src="https://cdn.jsdelivr.net/gh/wangningkai/gitfolio-online/assets/images/demo.png">
+<img src="./assets/images/demo.png">
 
 # Gitfolio-online
 
