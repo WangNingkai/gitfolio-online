@@ -63,7 +63,7 @@ const renderInfo = (info, args = {}) => {
         user.name == null || !user.name ? 'none' : 'block'
       };">${user.name}</span><a href="${user.url}">@${user.login}</a>`
       document.getElementById('userbio').innerHTML = user.bioHTML
-      document.getElementById('userbio').style.display = user.bio == null || !user.bioHTML ? 'none' : 'block'
+      document.getElementById('userbio').style.display = user.bioHTML == null || !user.bioHTML ? 'none' : 'block'
       document.getElementById('about').innerHTML = `
               <span style="display:${
                 user.company == null || !user.company ? 'none' : 'block'
@@ -72,8 +72,8 @@ const renderInfo = (info, args = {}) => {
                 user.email == null || !user.email ? 'none' : 'block'
               };"><i class="fas fa-envelope"></i> &nbsp; ${user.email}</span>
               <span style="display:${
-                user.blog == null || !user.blog ? 'none' : 'block'
-              };"><i class="fas fa-link"></i> &nbsp; <a href="${user.blog}">${user.blog}</a></span>
+                user.websiteUrl == null || !user.websiteUrl ? 'none' : 'block'
+              };"><i class="fas fa-link"></i> &nbsp; <a href="${user.websiteUrl}">${user.websiteUrl}</a></span>
               <span style="display:${
                 user.location == null || !user.location ? 'none' : 'block'
               };"><i class="fas fa-map-marker-alt"></i> &nbsp;&nbsp; ${user.location}</span>

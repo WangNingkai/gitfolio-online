@@ -30,7 +30,9 @@ const fetcher = (variables, token) => {
           name
           login
           avatarUrl
-          bio
+          bioHTML
+          websiteUrl
+          isHireable
           status {
             emoji
             message
