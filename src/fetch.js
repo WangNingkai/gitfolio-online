@@ -1,5 +1,5 @@
-const { request, logger } = require("./utils");
-const retryer = require("./retryer");
+const { request, logger } = require('./utils')
+const retryer = require('./retryer')
 
 const fetcher = (variables, token) => {
   return request(
@@ -11,6 +11,7 @@ const fetcher = (variables, token) => {
         isPrivate
         isArchived
         isTemplate
+        isFork
         stargazers {
           totalCount
         }
@@ -68,24 +69,23 @@ const fetcher = (variables, token) => {
     },
     {
       Authorization: `bearer ${token}`,
-    }
-  );
-};
-
-async function fetchInfo(username) {
-  if (!username) throw Error("Invalid username");
-  let res = await retryer(fetcher, {
-    username: username,
-  });
-
-  if (res.data.errors) {
-    logger.error(res.data.errors);
-    throw Error(res.data.errors[0].message || "Could not fetch user");
-  }
-
-  const user = res.data.data.user;
-
-  return user;
+    },
+  )
 }
 
-module.exports = fetchInfo;
+async function fetchInfo(username) {
+  if (!username) throw Error('Invalid username')
+  let res = await retryer(fetcher, {
+    username: username,
+  })
+
+  if (res.data.errors) {
+    logger.error(res.data.errors)
+    throw Error(res.data.errors[0].message || 'Could not fetch user')
+  }
+  const user = res.data.data.user
+
+  return user
+}
+
+module.exports = fetchInfo

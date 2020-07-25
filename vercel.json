@@ -1,6 +1,3 @@
 {
-    "redirects": [{
-        "source": "/",
-        "destination": "https://github.com/wangningkai/gitfolio-online"
-    }]
+    "version": "1.0.0"
 }

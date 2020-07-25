@@ -362,18 +362,14 @@ body {
 :root {
   --bg-color: rgb(10, 10, 10);
   --text-color: #fff;
-  --background-image: linear-gradient(
-      90deg,
-      rgba(10, 10, 10, 0.3),
-      rgb(10, 10, 10, 1)
-    ),
-    url("{{{background}}}");
-  --background-background: linear-gradient(
-      0deg,
-      rgba(10, 10, 10, 1),
-      rgba(10, 10, 10, 0.6)
-    ),
-    url("{{{background}}}") center center fixed;
+  --background-image: linear-gradient(90deg,
+    rgba(10, 10, 10, 0.3),
+    rgb(10, 10, 10, 1)),
+  url("https://cdn.jsdelivr.net/gh/wangningkai/wangningkai/assets/bg.jpg");
+  --background-background: linear-gradient(0deg,
+    rgba(10, 10, 10, 1),
+    rgba(10, 10, 10, 0.6)),
+  url("https://cdn.jsdelivr.net/gh/wangningkai/wangningkai/assets/bg.jpg") center center fixed;
   --height: 50vh;
 }
 
@@ -389,11 +385,9 @@ body {
 
 @media (max-width: 800px) {
   :root {
-    --background-image: linear-gradient(
-        0deg,
-        rgba(10, 10, 10, 1),
-        rgba(10, 10, 10, 0)
-      ),
-      url("{{{background}}}") !important;
+    --background-image: linear-gradient(0deg,
+      rgba(10, 10, 10, 1),
+      rgba(10, 10, 10, 0)),
+    url("https://cdn.jsdelivr.net/gh/wangningkai/wangningkai/assets/bg.jpg") !important;
   }
 }
