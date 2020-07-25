@@ -1,3 +1,9 @@
 {
-    "version": "1.0.0"
+    "name": "gitfolio-oneline",
+    "version": 1,
+    "routes": [{
+        "src": "/",
+        "dest": "/api/index.js"
+    }]
+
 }
