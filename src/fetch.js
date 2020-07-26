@@ -5,68 +5,68 @@ const fetcher = (variables, token) => {
   return request(
     {
       query: `
-      fragment RepoInfo on Repository {
-        name
-        nameWithOwner
-        isPrivate
-        isArchived
-        isTemplate
-        isFork
-        stargazers {
-          totalCount
-        }
-        description
-        shortDescriptionHTML
-        primaryLanguage {
-          color
-          id
-          name
-        }
-        forkCount
-        url
-      }
+fragment RepoInfo on Repository {
+  name
+  nameWithOwner
+  isPrivate
+  isArchived
+  isTemplate
+  isFork
+  stargazers {
+    totalCount
+  }
+  description
+  shortDescriptionHTML
+  primaryLanguage {
+    color
+    id
+    name
+  }
+  forkCount
+  url
+}
 
-      query userInfo($username: String!) {
-        user(login: $username) {
-          name
-          login
-          avatarUrl
-          bioHTML
-          websiteUrl
-          isHireable
-          status {
-            emoji
-            message
-          }
-          company
-          location
-          url
-          repositories(first: 10, ownerAffiliations: OWNER, isFork: false, privacy: PUBLIC, orderBy: {
-            direction: DESC,
-            field: STARGAZERS
-          }) {
-            totalCount
-            nodes {
-              ...RepoInfo
-            }
-          }
-          contributionsCollection {
-            totalCommitContributions
-          }
-          repositoriesContributedTo(first: 1, contributionTypes: [COMMIT, ISSUE, PULL_REQUEST, REPOSITORY]) {
-            totalCount
-          }
-          pullRequests(first: 1) {
-            totalCount
-          }
-          issues(first: 1) {
-            totalCount
-          }
-          followers {
-            totalCount
-          }
-        }
+query userInfo($username: String!) {
+  user(login: $username) {
+    name
+    login
+    avatarUrl
+    bioHTML
+    websiteUrl
+    isHireable
+    status {
+      emoji
+      message
+    }
+    company
+    location
+    url
+    repositories(first: 20, ownerAffiliations: OWNER, privacy: PUBLIC, orderBy: {direction: DESC, field: STARGAZERS}) {
+      totalCount
+      nodes {
+        ...RepoInfo
       }
+    }
+    contributionsCollection {
+      totalCommitContributions
+    }
+    repositoriesContributedTo(first: 1, contributionTypes: [COMMIT, ISSUE, PULL_REQUEST, REPOSITORY]) {
+      totalCount
+    }
+    pullRequests(first: 1) {
+      totalCount
+    }
+    issues(first: 1) {
+      totalCount
+    }
+    followers {
+      totalCount
+    }
+    following {
+      totalCount
+    }
+  }
+}
       `,
       variables,
     },

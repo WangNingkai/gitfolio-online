@@ -1,8 +1,8 @@
 const fetchInfo = require('../src/fetch')
 const renderInfo = require('../src/render')
-const { clampValue, CONSTANTS } = require('../src/utils')
+const { clampValue, parseBoolean, CONSTANTS } = require('../src/utils')
 module.exports = async (req, res) => {
-  const { username, theme, cache_seconds } = req.query
+  const { username, theme, includeFork, cache_seconds } = req.query
   if (typeof theme === 'undefined') {
     themeType = 'dark'
   } else {
@@ -20,7 +20,7 @@ module.exports = async (req, res) => {
     CONSTANTS.ONE_DAY,
   )
   res.setHeader('Cache-Control', `public, max-age=${cacheSeconds},s-maxage=86400,stale-while-revalidate`)
-  renderInfo(info, { theme: themeType }).then((value) => {
+  renderInfo(info, { theme: themeType, includeFork: parseBoolean(includeFork) }).then((value) => {
     res.send(value)
   })
 }

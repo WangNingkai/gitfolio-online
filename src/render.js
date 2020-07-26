@@ -3,21 +3,24 @@ const jsdom = require('jsdom').JSDOM,
   options = {
     resources: 'usable',
   }
+const { kFormatter } = require('../src/utils')
 const dir = path.resolve(__dirname, '..')
 const renderInfo = (info, args = {}) => {
-  const { includeFork, twitter, linkedin, medium, dribbble, theme } = args
-
+  const { theme, includeFork, twitter, linkedin, medium, dribbble } = args
   return jsdom.fromFile(`${dir}/assets/index.html`, options).then((dom) => {
     let window = dom.window,
-      document = window.document
+      document = window.document,
+      stars = 0
     try {
       const user = info
       const repos = user.repositories.nodes
       for (let i = 0; i < repos.length; i++) {
+        stars += repos[i].stargazers.totalCount
+        isFork = repos[i].isFork
         let element
-        if (repos[i].isFork == false) {
+        if (isFork == false) {
           element = document.getElementById('work_section')
-        } else if (includeFork == true) {
+        } else if (isFork == true && includeFork == true) {
           document.getElementById('forks').style.display = 'block'
           element = document.getElementById('forks_section')
         } else {
@@ -34,18 +37,19 @@ const renderInfo = (info, args = {}) => {
             </div>
             <div class="bottom_section">
                 <span style="display:${
-                  repos[i].primaryLanguage.name == null ? 'none' : 'inline-block'
-                };"><i class="fas fa-code"></i>&nbsp; ${repos[i].primaryLanguage.name}</span>
-                <span><i class="fas fa-star"></i>&nbsp; ${repos[i].stargazers.totalCount}</span>
-                <span><i class="fas fa-code-branch"></i>&nbsp; ${repos[i].forkCount}</span>
+                  repos[i].primaryLanguage == null ? 'none' : 'inline-block'
+                };"><i class="fas fa-code"></i>&nbsp; ${
+          repos[i].primaryLanguage == null ? '' : repos[i].primaryLanguage.name
+        }</span>
+                <span><i class="fas fa-star"></i>&nbsp; ${kFormatter(repos[i].stargazers.totalCount)}</span>
+                <span><i class="fas fa-code-branch"></i>&nbsp; ${kFormatter(repos[i].forkCount)}</span>
             </div>
         </section>
         </a>`
       }
-      let background = 'https://cdn.jsdelivr.net/gh/wangningkai/wangningkai/assets/bg.jpg'
-
+      stars = kFormatter(stars)
       document.title = user.login
-      themeFile = `/assets/themes/${theme}.css`
+      themeFile = `https://cdn.jsdelivr.net/gh/wangningkai/gitfolio-online/assets/themes/${theme}.css`
 
       let style = document.createElement('link')
       style.setAttribute('rel', 'stylesheet')
@@ -66,8 +70,14 @@ const renderInfo = (info, args = {}) => {
       document.getElementById('userbio').style.display = user.bioHTML == null || !user.bioHTML ? 'none' : 'block'
       document.getElementById('about').innerHTML = `
               <span style="display:${
+                user.followers == null || !user.followers ? 'none' : 'block'
+              };"><i class="fas fa-users"></i> &nbsp;&nbsp; ${kFormatter(
+        user.followers.totalCount,
+      )} followers · ${kFormatter(user.following.totalCount)} following</span>
+              <span style="display:block"><i class="fas fa-star"></i> &nbsp;&nbsp; ${stars} stars</span>
+              <span style="display:${
                 user.company == null || !user.company ? 'none' : 'block'
-              };"><i class="fas fa-users"></i> &nbsp; ${user.company}</span>
+              };"><i class="fas fa-building"></i> &nbsp; @${user.company}</span>
               <span style="display:${
                 user.email == null || !user.email ? 'none' : 'block'
               };"><i class="fas fa-envelope"></i> &nbsp; ${user.email}</span>

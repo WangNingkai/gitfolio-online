@@ -2,7 +2,7 @@
     "name": "gitfolio-oneline",
     "routes": [{
             "src": "/",
-            "dest": "/api/index.js"
+            "dest": "/api/index.js?username=wangningkai"
         },
         {
             "src": "/user/(?<username>[^/]*)",

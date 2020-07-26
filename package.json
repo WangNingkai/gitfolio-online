@@ -28,6 +28,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "jsdom": "^16.3.0",
-    "prettier": "^2.0.5"
+    "prettier": "^2.0.5",
+    "socks-proxy-agent": "^5.0.0"
   }
 }
