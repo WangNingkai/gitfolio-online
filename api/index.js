@@ -1,6 +1,6 @@
 const fetchInfo = require('../src/fetch')
 const renderInfo = require('../src/render')
-const { clampValue, parseBoolean, CONSTANTS } = require('../src/utils')
+const { renderError, clampValue, parseBoolean, CONSTANTS } = require('../src/utils')
 module.exports = async (req, res) => {
   const { username, theme, includeFork, cache_seconds } = req.query
   if (typeof theme === 'undefined') {
@@ -12,7 +12,7 @@ module.exports = async (req, res) => {
   try {
     info = await fetchInfo(username)
   } catch (err) {
-    return res.send(err.message)
+    return res.send(renderError(err.message))
   }
   const cacheSeconds = clampValue(
     parseInt(cache_seconds || CONSTANTS.THIRTY_MINUTES, 10),
