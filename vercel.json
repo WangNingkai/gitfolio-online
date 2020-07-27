@@ -7,6 +7,10 @@
         {
             "src": "/user/(?<username>[^/]*)",
             "dest": "/api/index.js?username=$username"
+        },
+        {
+            "src": "/u/(?<username>[^/]*)",
+            "dest": "/api/index.js?username=$username"
         }
     ]
 }
