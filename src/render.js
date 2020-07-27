@@ -6,7 +6,7 @@ const jsdom = require('jsdom').JSDOM,
 const { kFormatter } = require('../src/utils')
 const dir = path.resolve(__dirname, '..')
 const renderInfo = (info, args = {}) => {
-  const { theme, includeFork, twitter, linkedin, medium, dribbble } = args
+  const { theme, includeFork} = args
   return jsdom.fromFile(`${dir}/assets/index.html`, options).then((dom) => {
     let window = dom.window,
       document = window.document,
@@ -90,20 +90,6 @@ const renderInfo = (info, args = {}) => {
               <span style="display:${
                 user.isHireable == false || !user.isHireable ? 'none' : 'block'
               };"><i class="fas fa-user-tie"></i> &nbsp; Available for hire</span>
-              <div class="socials">
-              <span style="display:${
-                twitter == null ? 'none !important' : 'block'
-              };"><a href="https://www.twitter.com/${twitter}" target="_blank" class="socials"><i class="fab fa-twitter"></i></a></span>
-              <span style="display:${
-                dribbble == null ? 'none !important' : 'block'
-              };"><a href="https://www.dribbble.com/${dribbble}" target="_blank" class="socials"><i class="fab fa-dribbble"></i></a></span>
-              <span style="display:${
-                linkedin == null ? 'none !important' : 'block'
-              };"><a href="https://www.linkedin.com/in/${linkedin}/" target="_blank" class="socials"><i class="fab fa-linkedin-in"></i></a></span>
-              <span style="display:${
-                medium == null ? 'none !important' : 'block'
-              };"><a href="https://www.medium.com/@${medium}/" target="_blank" class="socials"><i class="fab fa-medium-m"></i></a></span>
-              </div>
               `
       return '<!DOCTYPE html>' + window.document.documentElement.outerHTML
     } catch (error) {
