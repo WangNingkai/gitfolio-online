@@ -4,11 +4,11 @@
   --background-image: linear-gradient(90deg,
       rgba(10, 10, 10, 0.3),
       rgb(10, 10, 10, 1)),
-    url("https://cdn.jsdelivr.net/gh/wangningkai/wangningkai/assets/bg.jpg");
+    url("https://picsum.photos/1920/1080/");
   --background-background: linear-gradient(0deg,
       rgba(10, 10, 10, 1),
       rgba(10, 10, 10, 0.6)),
-    url("https://cdn.jsdelivr.net/gh/wangningkai/wangningkai/assets/bg.jpg") center center fixed;
+    url("https://picsum.photos/1920/1080/") center center fixed;
   --height: 50vh;
 }
 
@@ -27,6 +27,6 @@
     --background-image: linear-gradient(0deg,
         rgba(10, 10, 10, 1),
         rgba(10, 10, 10, 0)),
-      url("https://cdn.jsdelivr.net/gh/wangningkai/wangningkai/assets/bg.jpg") !important;
+      url("https://picsum.photos/1920/1080/") !important;
   }
 }

@@ -77,7 +77,7 @@ const renderInfo = (info, args = {}) => {
               <span style="display:block"><i class="fas fa-star"></i> &nbsp;&nbsp; ${stars} stars</span>
               <span style="display:${
                 user.company == null || !user.company ? 'none' : 'block'
-              };"><i class="fas fa-building"></i> &nbsp; @${user.company}</span>
+              };"><i class="fas fa-building"></i> &nbsp; ${user.company}</span>
               <span style="display:${
                 user.email == null || !user.email ? 'none' : 'block'
               };"><i class="fas fa-envelope"></i> &nbsp; ${user.email}</span>

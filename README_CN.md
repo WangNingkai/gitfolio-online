@@ -13,6 +13,12 @@ Gitfolio will help you get started with a portfolio website where you could show
 
 Check out this [live demo](https://gitfolio-online.vercel.app/user/wangningkai) to see gitfolio in action.
 
+### Getting Started
+
+```
+https://gitfolio-online.vercel.app/user/{username}?theme={theme}&includeFork={includeFork}&cache_seconds={cache_seconds}
+```
+
 ### License
 
 ![GitHub](https://img.shields.io/github/license/imfunniee/gitfolio.svg?style=popout-square)

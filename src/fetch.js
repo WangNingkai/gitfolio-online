@@ -41,7 +41,7 @@ query userInfo($username: String!) {
     company
     location
     url
-    repositories(first: 20, ownerAffiliations: OWNER, privacy: PUBLIC, orderBy: {direction: DESC, field: STARGAZERS}) {
+    repositories(first: 30, ownerAffiliations: OWNER, privacy: PUBLIC, orderBy: {direction: DESC, field: STARGAZERS}) {
       totalCount
       nodes {
         ...RepoInfo
