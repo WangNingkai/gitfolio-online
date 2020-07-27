@@ -71,10 +71,10 @@ const renderInfo = (info, args = {}) => {
       document.getElementById('about').innerHTML = `
               <span style="display:${
                 user.followers == null || !user.followers ? 'none' : 'block'
-              };"><i class="fas fa-users"></i> &nbsp;&nbsp; ${kFormatter(
-        user.followers.totalCount,
-      )} followers · ${kFormatter(user.following.totalCount)} following</span>
-              <span style="display:block"><i class="fas fa-star"></i> &nbsp;&nbsp; ${stars} stars</span>
+              };"><i class="fas fa-users"></i> &nbsp; ${kFormatter(user.followers.totalCount)} followers · ${kFormatter(
+        user.following.totalCount,
+      )} following</span>
+              <span style="display:block"><i class="fas fa-star"></i> &nbsp; ${stars} stars</span>
               <span style="display:${
                 user.company == null || !user.company ? 'none' : 'block'
               };"><i class="fas fa-building"></i> &nbsp; ${user.company}</span>
@@ -86,10 +86,10 @@ const renderInfo = (info, args = {}) => {
               };"><i class="fas fa-link"></i> &nbsp; <a href="${user.websiteUrl}">${user.websiteUrl}</a></span>
               <span style="display:${
                 user.location == null || !user.location ? 'none' : 'block'
-              };"><i class="fas fa-map-marker-alt"></i> &nbsp;&nbsp; ${user.location}</span>
+              };"><i class="fas fa-map-marker-alt"></i> &nbsp; ${user.location}</span>
               <span style="display:${
                 user.isHireable == false || !user.isHireable ? 'none' : 'block'
-              };"><i class="fas fa-user-tie"></i> &nbsp;&nbsp; Available for hire</span>
+              };"><i class="fas fa-user-tie"></i> &nbsp; Available for hire</span>
               <div class="socials">
               <span style="display:${
                 twitter == null ? 'none !important' : 'block'
