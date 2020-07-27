@@ -8,22 +8,22 @@ const fetcher = (variables, token) => {
 fragment RepoInfo on Repository {
   name
   nameWithOwner
+  description
+  shortDescriptionHTML
+  url
   isPrivate
   isArchived
   isTemplate
   isFork
-  stargazers {
-    totalCount
-  }
-  description
-  shortDescriptionHTML
   primaryLanguage {
     color
     id
     name
+  }  
+  stargazers {
+    totalCount
   }
   forkCount
-  url
 }
 
 query userInfo($username: String!) {
@@ -34,14 +34,20 @@ query userInfo($username: String!) {
     bioHTML
     websiteUrl
     isHireable
-    status {
-      emoji
-      message
-    }
     company
     location
     url
     starredRepositories{
+      totalCount
+    }
+    status {
+      emoji
+      message
+    }
+    followers {
+      totalCount
+    }
+    following {
       totalCount
     }
     repositories(first: 30, ownerAffiliations: OWNER, privacy: PUBLIC, orderBy: {direction: DESC, field: STARGAZERS}) {
@@ -49,12 +55,6 @@ query userInfo($username: String!) {
       nodes {
         ...RepoInfo
       }
-    }
-    followers {
-      totalCount
-    }
-    following {
-      totalCount
     }
   }
 }
