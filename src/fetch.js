@@ -41,23 +41,14 @@ query userInfo($username: String!) {
     company
     location
     url
+    starredRepositories{
+      totalCount
+    }
     repositories(first: 30, ownerAffiliations: OWNER, privacy: PUBLIC, orderBy: {direction: DESC, field: STARGAZERS}) {
       totalCount
       nodes {
         ...RepoInfo
       }
-    }
-    contributionsCollection {
-      totalCommitContributions
-    }
-    repositoriesContributedTo(first: 1, contributionTypes: [COMMIT, ISSUE, PULL_REQUEST, REPOSITORY]) {
-      totalCount
-    }
-    pullRequests(first: 1) {
-      totalCount
-    }
-    issues(first: 1) {
-      totalCount
     }
     followers {
       totalCount
