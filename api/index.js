@@ -4,7 +4,7 @@ const { renderError, clampValue, parseBoolean, CONSTANTS } = require('../src/uti
 module.exports = async (req, res) => {
   const { username, theme, includeFork, cache_seconds } = req.query
   if (typeof theme === 'undefined') {
-    themeType = 'light'
+    themeType = 'dark'
   } else {
     themeType = theme
   }
