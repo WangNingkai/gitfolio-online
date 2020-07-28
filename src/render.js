@@ -5,6 +5,7 @@ const hbs = require('handlebars')
 /*  Creates promise-returning async functions
     from callback-passed async functions      */
 const fs = bluebird.promisifyAll(require('fs'))
+const minify = require('html-minifier').minify
 const jsdom = require('jsdom').JSDOM,
   options = {
     resources: 'usable',
@@ -127,7 +128,9 @@ const renderInfo = async (info, args = {}) => {
                 user.isHireable == false || !user.isHireable ? 'none' : 'block'
               };"><i class="fas fa-user-tie"></i> &nbsp; Available for hire</span>
               `
-    return '<!DOCTYPE html>' + window.document.documentElement.outerHTML
+    let content = '<!DOCTYPE html>' + window.document.documentElement.outerHTML
+
+    return minify(content, { removeComments: true, collapseWhitespace: true, minifyJS: true, minifyCSS: true })
   } catch (error) {
     console.error(error)
   }
