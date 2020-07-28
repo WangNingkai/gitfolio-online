@@ -66,7 +66,17 @@ https://gitfolio-online.vercel.app/u/{username}?includeFork=true/false
 
 [![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/wangningkai/gitfolio-online)
 
-### :sparkling_heart: 支持这个项目
+## 问题反馈
+
+> 进行任何操作前请先阅读 [《提问的智慧》](https://github.com/ruby-china/How-To-Ask-Questions-The-Smart-Way/blob/master/README-zh_CN.md)
+
+当前获取帮助有三种方式：
+
+1. 通过 [GitHub issue](https://github.com/WangNingkai/gitfolio-online/issues) 提交问题（仅限问题反馈）
+2. 通过 [个人博客](https://imwnk.cn) 评论留言
+3. 通过个人邮箱联系 [i@ningkai.wang](mailto:i@ningkai.wang)
+
+## :sparkling_heart: 支持这个项目
 
 我尽己所能地进行开源，并且我尽量回复每个在使用项目时需要帮助的人。很明显，这需要时间，但你可以免费享受这些。
 

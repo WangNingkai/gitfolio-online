@@ -8,6 +8,8 @@
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 ![visitors](https://visitor-badge.laobi.icu/badge?page_id=WangNingkai.gitfolio-online)
 
+> **[中文 README](./README_CN.md)**
+
 ## Introduction
 
 ### Personal Website For Every Github User
@@ -65,6 +67,16 @@ You can customize the appearance of your page however you want with URL params.
 Since the GitHub API only allows 5k requests per hour, it is possible that my `https://gitfolio-online.vercel.app/u/wangningkai` could hit the rate limiter. If you host it on your own Vercel server, then you don't have to worry about anything. Click on the deploy button to get started!
 
 [![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/wangningkai/gitfolio-online)
+
+## Bug report
+
+> Please read before bug report[《How To Ask Questions The Smart Way》](http://www.catb.org/~esr/faqs/smart-questions.html)
+
+3 way to bug report：
+
+1. [GitHub issue](https://github.com/WangNingkai/gitfolio-online/issues) 
+2. [Blog](https://imwnk.cn)
+3. [i@ningkai.wang](mailto:i@ningkai.wang)
 
 ### :sparkling_heart: Support the project
 
