@@ -74,7 +74,7 @@ Since the GitHub API only allows 5k requests per hour, it is possible that my `h
 
 3 way to bug report：
 
-1. [GitHub issue](https://github.com/WangNingkai/gitfolio-online/issues) 
+1. [GitHub issue](https://github.com/WangNingkai/gitfolio-online/issues)
 2. [Blog](https://imwnk.cn)
 3. [i@ningkai.wang](mailto:i@ningkai.wang)
 

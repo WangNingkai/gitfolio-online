@@ -10,7 +10,7 @@ const jsdom = require('jsdom').JSDOM,
   options = {
     resources: 'usable',
   }
-const { kFormatter } = require('../src/utils')
+const { kFormatter, randomNumber } = require('../src/utils')
 const dir = path.resolve(__dirname, '..')
 const assetDir = path.resolve(`${dir}/assets/`)
 
@@ -80,7 +80,8 @@ const renderInfo = async (info, args = {}) => {
     }
     let time = new Date().getTime() - 24 * 60 * 60 * 1000
     let date = new Date(time).format('yyyyMMdd')
-    let background = `https://cdn.jsdelivr.net/gh/WangNingkai/BingImageApi@latest/images/${date}.png`
+    let random = randomNumber(date - 7, date)
+    let background = `https://cdn.jsdelivr.net/gh/WangNingkai/BingImageApi@latest/images/${random}.png`
     let themeSource = fs.readFileSync(path.join(assetDir, 'themes', `${theme}.css`))
     themeSource = themeSource.toString('utf-8')
     let themeTemplate = hbs.compile(themeSource)

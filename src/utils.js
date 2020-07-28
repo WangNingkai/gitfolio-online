@@ -25,6 +25,10 @@ function parseBoolean(value) {
   }
 }
 
+function randomNumber(min, max) {
+  return Math.round(Math.random() * (max - min)) + min
+}
+
 function request(data, headers) {
   return axios({
     url: 'https://api.github.com/graphql',
@@ -57,6 +61,7 @@ module.exports = {
   request,
   clampValue,
   parseBoolean,
+  randomNumber,
   logger,
   CONSTANTS,
 }
