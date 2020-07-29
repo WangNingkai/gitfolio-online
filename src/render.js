@@ -1,25 +1,23 @@
 const path = require('path')
-/* Promise library */
 const bluebird = require('bluebird')
 const hbs = require('handlebars')
-/*  Creates promise-returning async functions
-    from callback-passed async functions      */
 const fs = bluebird.promisifyAll(require('fs'))
 const minify = require('html-minifier').minify
 const jsdom = require('jsdom').JSDOM,
   options = {
     resources: 'usable',
   }
-const { kFormatter, randomNumber } = require('../src/utils')
-const dir = path.resolve(__dirname, '..')
-const assetDir = path.resolve(`${dir}/assets/`)
+const { kFormatter, randomNumber, timeFormat } = require('../src/utils')
 
 const renderInfo = async (info, args = {}) => {
+  const dir = path.resolve(__dirname, '..')
+  const assetDir = path.resolve(`${dir}/assets/`)
   const { theme, includeFork } = args
   const dom = await jsdom.fromFile(path.resolve(assetDir, 'index.html'), options)
   let window = dom.window,
     document = window.document,
-    stars = 0
+    stars = 0,
+    content
   try {
     const user = info
     const repos = user.repositories.nodes
@@ -58,30 +56,9 @@ const renderInfo = async (info, args = {}) => {
     }
     stars = kFormatter(stars)
     document.title = user.login
-    Date.prototype.format = function (fmt) {
-      let o = {
-        'M+': this.getMonth() + 1,
-        'd+': this.getDate(),
-        'h+': this.getHours(),
-        'm+': this.getMinutes(),
-        's+': this.getSeconds(),
-        'q+': Math.floor((this.getMonth() + 3) / 3),
-        S: this.getMilliseconds(),
-      }
-      if (/(y+)/.test(fmt)) {
-        fmt = fmt.replace(RegExp.$1, (this.getFullYear() + '').substr(4 - RegExp.$1.length))
-      }
-      for (let k in o) {
-        if (new RegExp('(' + k + ')').test(fmt)) {
-          fmt = fmt.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k] : ('00' + o[k]).substr(('' + o[k]).length))
-        }
-      }
-      return fmt
-    }
-    let time = new Date().getTime() - 24 * 60 * 60 * 1000
-    let date = new Date(time).format('yyyyMMdd')
-    let random = randomNumber(date - 7, date)
-    let background = `https://cdn.jsdelivr.net/gh/WangNingkai/BingImageApi@latest/images/${random}.png`
+    let date = timeFormat(new Date(new Date().getTime() - 24 * 60 * 60 * 1000), 'yyyyMMdd')
+    let randomDate = randomNumber(date - 7, date)
+    let background = `https://cdn.jsdelivr.net/gh/WangNingkai/BingImageApi@latest/images/${randomDate}.png`
     let themeSource = fs.readFileSync(path.join(assetDir, 'themes', `${theme}.css`))
     themeSource = themeSource.toString('utf-8')
     let themeTemplate = hbs.compile(themeSource)
@@ -129,7 +106,7 @@ const renderInfo = async (info, args = {}) => {
                 user.isHireable == false || !user.isHireable ? 'none' : 'block'
               };"><i class="fas fa-user-tie"></i> &nbsp; Available for hire</span>
               `
-    let content = '<!DOCTYPE html>' + window.document.documentElement.outerHTML
+    content = '<!DOCTYPE html>' + window.document.documentElement.outerHTML
 
     return minify(content, { removeComments: true, collapseWhitespace: true, minifyJS: true, minifyCSS: true })
   } catch (error) {
