@@ -19,7 +19,7 @@ module.exports = async (req, res) => {
     CONSTANTS.THIRTY_MINUTES,
     CONSTANTS.ONE_DAY,
   )
-  res.setHeader('Cache-Control', `public, max-age=${cacheSeconds},s-maxage=86400,stale-while-revalidate`)
+  res.setHeader('Cache-Control', `s-maxage=${cacheSeconds},stale-while-revalidate`)
   renderInfo(info, { theme: themeType, includeFork: parseBoolean(includeFork) }).then((value) => {
     res.send(value)
   })
