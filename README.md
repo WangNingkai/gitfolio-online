@@ -1,4 +1,4 @@
-![](https://cdn.jsdelivr.net/gh/wangningkai/wangningkai//assets/20200726173312.png)
+![](https://cdn.jsdelivr.net/gh/wangningkai/wangningkai/assets/20200726173312.png)
 
 # Gitfolio-online
 
@@ -12,7 +12,7 @@
 
 ## Introduction
 
-### Personal Website For Every Github User
+> Personal Website For Every Github User
 
 Gitfolio will help you get started with a portfolio website where you could showcase your work.
 

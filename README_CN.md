@@ -1,4 +1,4 @@
-![](https://cdn.jsdelivr.net/gh/wangningkai/wangningkai//assets/20200726173312.png)
+![](https://cdn.jsdelivr.net/gh/wangningkai/wangningkai/assets/20200726173312.png)
 
 # Gitfolio-online
 
@@ -8,9 +8,11 @@
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 ![visitors](https://visitor-badge.laobi.icu/badge?page_id=WangNingkai.gitfolio-online)
 
+> **[中文 README](./README_CN.md)**
+
 ## 介绍
 
-### Github 用户的个人主页
+> 适合于每个 Github 用户的在线个人网站
 
 Gitfolio 将帮助你组建一个可以展示 Github 成果的网站.
 
