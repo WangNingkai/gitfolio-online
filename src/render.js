@@ -7,7 +7,7 @@ const jsdom = require('jsdom').JSDOM,
   options = {
     resources: 'usable',
   }
-const { kFormatter, randomNumber, timeFormat } = require('../src/utils')
+const { kFormatter, randomNumber, timeFormat, renderGithub } = require('../src/utils')
 
 const renderInfo = async (info, args = {}) => {
   const dir = path.resolve(__dirname, '..')
@@ -77,6 +77,7 @@ const renderInfo = async (info, args = {}) => {
 
     document.getElementsByTagName('head')[0].appendChild(icon)
     document.getElementsByTagName('head')[0].appendChild(style)
+    document.getElementById('github').innerHTML = renderGithub(user.url, theme)
     document.getElementById('profile_img').style.background = `url('${user.avatarUrl}') center center`
     document.getElementById('username').innerHTML = `<span style="display:${
       user.name == null || !user.name ? 'none' : 'block'
