@@ -7,7 +7,7 @@ const jsdom = require('jsdom').JSDOM,
   options = {
     resources: 'usable',
   }
-const { kFormatter, randomNumber, timeFormat, renderGithub } = require('../src/utils')
+const { kFormatter, renderGithub } = require('../src/utils')
 
 const renderInfo = async (info, args = {}) => {
   const dir = path.resolve(__dirname, '..')
@@ -56,9 +56,7 @@ const renderInfo = async (info, args = {}) => {
     }
     stars = kFormatter(stars)
     document.title = user.login
-    let date = timeFormat(new Date(new Date().getTime() - 24 * 60 * 60 * 1000), 'yyyyMMdd')
-    let randomDate = randomNumber(date - 7, date)
-    let background = `https://cdn.jsdelivr.net/gh/WangNingkai/BingImageApi@latest/images/${randomDate}.png`
+    let background = `https://cdn.jsdelivr.net/gh/WangNingkai/BingImageApi@latest/images/latest.png`
     let themeSource = fs.readFileSync(path.join(assetDir, 'themes', `${theme}.css`))
     themeSource = themeSource.toString('utf-8')
     let themeTemplate = hbs.compile(themeSource)
