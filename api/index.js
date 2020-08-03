@@ -12,7 +12,7 @@ module.exports = async (req, res) => {
   try {
     info = await fetchInfo(username)
   } catch (err) {
-    return res.send(renderError(err.message))
+    res.send(renderError(err.message))
   }
   const cacheSeconds = clampValue(
     parseInt(cache_seconds || CONSTANTS.THIRTY_MINUTES, 10),
