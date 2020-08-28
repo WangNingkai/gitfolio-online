@@ -26,7 +26,7 @@ fragment RepoInfo on Repository {
   forkCount
 }
 
-query userInfo($username: String!) {
+query userInfo($username: String!,$repo_num: Int!) {
   user(login: $username) {
     name
     login
@@ -50,7 +50,7 @@ query userInfo($username: String!) {
     following {
       totalCount
     }
-    repositories(first: 30, ownerAffiliations: OWNER, privacy: PUBLIC, orderBy: {direction: DESC, field: STARGAZERS}) {
+    repositories(first: $repo_num, ownerAffiliations: OWNER, privacy: PUBLIC, orderBy: {direction: DESC, field: STARGAZERS}) {
       totalCount
       nodes {
         ...RepoInfo
@@ -67,10 +67,14 @@ query userInfo($username: String!) {
   )
 }
 
-async function fetchInfo(username) {
+async function fetchInfo(username, repoNum) {
   if (!username) throw Error('Invalid username')
+  if (!repoNum) {
+    repoNum = 30
+  }
   let res = await retryer(fetcher, {
     username: username,
+    repo_num: Number(repoNum),
   })
 
   if (res.data.errors) {

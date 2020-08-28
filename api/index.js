@@ -2,7 +2,7 @@ const fetchInfo = require('../src/fetch')
 const renderInfo = require('../src/render')
 const { renderError, clampValue, parseBoolean, CONSTANTS } = require('../src/utils')
 module.exports = async (req, res) => {
-  const { username, theme, includeFork, cache_seconds } = req.query
+  const { username, theme, includeFork, cache_seconds, repoNum } = req.query
   if (typeof theme === 'undefined') {
     themeType = 'dark'
   } else {
@@ -10,7 +10,7 @@ module.exports = async (req, res) => {
   }
   let info
   try {
-    info = await fetchInfo(username)
+    info = await fetchInfo(username, repoNum)
   } catch (err) {
     res.send(renderError(err.message))
   }

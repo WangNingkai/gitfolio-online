@@ -61,6 +61,7 @@ You can customize the appearance of your page however you want with URL params.
 | theme         | string | sets inbuilt theme                   | 'dark'        |
 | cache_seconds | number | manually set custom cache control    | 1800          |
 | includeFork   | bool   | select whether to display fork repos | false         |
+| repoNum       | number | display repos number                 | 30            |
 
 ## Deploy on your own Vercel instance
 

@@ -61,6 +61,7 @@ https://gitfolio-online.vercel.app/u/{username}?includeFork=true/false
 | theme         | string | sets inbuilt theme                   | 'dark'        |
 | cache_seconds | number | manually set custom cache control    | 1800          |
 | includeFork   | bool   | select whether to display fork repos | false         |
+| repoNum       | number | display repos number                 | 30            |
 
 ## 部署到 Vercel 实例
 
