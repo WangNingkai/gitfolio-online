@@ -75,6 +75,7 @@ query userInfo($username: String!,$repo_num: Int!) {
     },
   )
 }
+
 const totalCommitsFetcher = async (username) => {
   if (!githubUsernameRegex.test(username)) {
     return 0
@@ -106,7 +107,7 @@ const totalCommitsFetcher = async (username) => {
   }
 }
 
-async function fetchInfo(username, repoNum) {
+const fetchInfo = async (username, repoNum) => {
   if (!username) throw Error('Invalid username')
   if (!repoNum) {
     repoNum = 30
