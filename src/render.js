@@ -89,6 +89,9 @@ const renderInfo = async (info, args = {}) => {
       user.following.totalCount,
     )} following</span>
               <span style="display:block"><i class="fas fa-star"></i> &nbsp; ${stars} stars</span>
+              <span style="display:block"><i class="fas fa-history"></i> &nbsp; ${kFormatter(
+                user.totalCommits,
+              )} commits</span>
               <span style="display:${
                 user.company == null || !user.company ? 'none' : 'block'
               };"><i class="fas fa-building"></i> &nbsp; ${user.company}</span>

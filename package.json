@@ -28,7 +28,8 @@
     "bluebird": "^3.7.2",
     "handlebars": "^4.7.6",
     "html-minifier": "^4.0.0",
-    "jsdom": "^16.3.0"
+    "jsdom": "^16.3.0",
+    "github-username-regex": "^1.0.0"
   },
   "devDependencies": {
     "prettier": "^2.0.5",
