@@ -20,6 +20,10 @@ const renderError = (message, secondaryMessage = 'Opps!') => {
  */
 const renderGithub = (url, theme = 'light') => {
   let themeSource = {
+    dracula: {
+      fill: '#fff',
+      color: 'rgb(10, 10, 10)',
+    },
     dark: {
       fill: '#fff',
       color: 'rgb(10, 10, 10)',
