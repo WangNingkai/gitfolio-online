@@ -24,7 +24,7 @@
   },
   "license": "GPL-3.0",
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "bluebird": "^3.7.2",
     "github-username-regex": "^1.0.0",
     "handlebars": "^4.7.6",
