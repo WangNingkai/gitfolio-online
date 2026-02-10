@@ -99,6 +99,7 @@ const totalCommitsFetcher = async (username) => {
     if (res.data.total_count) {
       return res.data.total_count
     }
+    return 0
   } catch (err) {
     // just return 0 if there is something wrong so that
     // we don't break the whole app
@@ -109,23 +110,24 @@ const totalCommitsFetcher = async (username) => {
 
 const fetchInfo = async (username, repoNum) => {
   if (!username) throw Error('Invalid username')
-  if (!repoNum) {
-    repoNum = 30
-  }
+  const numRepoNum = repoNum ? Number(repoNum) : 30
 
-  let res = await retryer(fetcher, {
-    username: username,
-    repo_num: Number(repoNum),
-  })
+  const [res, experimentalTotalCommits] = await Promise.all([
+    retryer(fetcher, {
+      username: username,
+      repo_num: numRepoNum,
+    }),
+    totalCommitsFetcher(username),
+  ])
 
   if (res.data.errors) {
     logger.error(res.data.errors)
     throw Error(res.data.errors[0].message || 'Could not fetch user')
   }
-  experimental_totalCommits = await totalCommitsFetcher(username)
+
   const user = res.data.data.user
   const contributionCount = user.contributionsCollection
-  user.totalCommits = contributionCount.totalCommitContributions + experimental_totalCommits
+  user.totalCommits = contributionCount.totalCommitContributions + experimentalTotalCommits
   return user
 }
 

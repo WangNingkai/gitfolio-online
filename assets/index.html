@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -6,13 +6,28 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title></title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/wangningkai/gitfolio-online/assets/index.min.css" />
   </head>
 
   <body>
     <div id="loading">
-      <div id="spinner"></div>
+      <div id="skeleton">
+        <div class="skeleton-profile">
+          <div class="skeleton-avatar"></div>
+          <div class="skeleton-name"></div>
+          <div class="skeleton-bio"></div>
+        </div>
+        <div class="skeleton-content">
+          <h1 class="skeleton-title"></h1>
+          <div class="skeleton-grid">
+            <div class="skeleton-card"></div>
+            <div class="skeleton-card"></div>
+            <div class="skeleton-card"></div>
+            <div class="skeleton-card"></div>
+          </div>
+        </div>
+      </div>
     </div>
     <div id="github"></div>
     <div id="profile">
@@ -36,7 +51,7 @@
         <a href="https://github.com/wangningkai" target="_blank">made on earth by a human</a>
       </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@4.0.0/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/magic-grid@3.2.4/dist/magic-grid.min.js"></script>
     <script type="text/javascript">
       setTimeout(function () {
@@ -54,19 +69,19 @@
       const magicProjectsGrid = new MagicGrid({
         container: '#work_section',
         animate: false,
-        gutter: 30, // default gutter size
+        gutter: 30,
         static: true,
         useMin: false,
-        maxColumns: 2,
+        maxColumns: window.innerWidth <= 800 ? 1 : 2,
         useTransform: true,
       })
       const magicForksGrid = new MagicGrid({
         container: '#forks_section',
         animate: false,
-        gutter: 30, // default gutter size
+        gutter: 30,
         static: true,
         useMin: false,
-        maxColumns: 2,
+        maxColumns: window.innerWidth <= 800 ? 1 : 2,
         useTransform: true,
       })
       $(function () {

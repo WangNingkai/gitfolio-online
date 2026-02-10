@@ -1,7 +1,6 @@
 const path = require('path')
-const bluebird = require('bluebird')
 const hbs = require('handlebars')
-const fs = bluebird.promisifyAll(require('fs'))
+const fs = require('fs')
 const minify = require('html-minifier').minify
 const jsdom = require('jsdom').JSDOM,
   options = {
@@ -39,15 +38,15 @@ const renderInfo = async (info, args = {}) => {
             <div class="section_title">${repos[i].name}</div>
             <div class="about_section">
             <span style="display:${repos[i].shortDescriptionHTML == undefined ? 'none' : 'block'};">${
-        repos[i].shortDescriptionHTML
-      }</span>
+              repos[i].shortDescriptionHTML
+            }</span>
             </div>
             <div class="bottom_section">
                 <span style="display:${
                   repos[i].primaryLanguage == null ? 'none' : 'inline-block'
                 };"><i class="fas fa-code"></i>&nbsp; ${
-        repos[i].primaryLanguage == null ? '' : repos[i].primaryLanguage.name
-      }</span>
+                  repos[i].primaryLanguage == null ? '' : repos[i].primaryLanguage.name
+                }</span>
                 <span><i class="fas fa-star"></i>&nbsp; ${kFormatter(repos[i].stargazers.totalCount)}</span>
                 <span><i class="fas fa-code-branch"></i>&nbsp; ${kFormatter(repos[i].forkCount)}</span>
             </div>
@@ -86,8 +85,8 @@ const renderInfo = async (info, args = {}) => {
               <span style="display:${
                 user.followers == null || !user.followers ? 'none' : 'block'
               };"><i class="fas fa-users"></i> &nbsp; ${kFormatter(user.followers.totalCount)} followers · ${kFormatter(
-      user.following.totalCount,
-    )} following</span>
+                user.following.totalCount,
+              )} following</span>
               <span style="display:block"><i class="fas fa-star"></i> &nbsp; ${stars} stars</span>
               <span style="display:block"><i class="fas fa-history"></i> &nbsp; ${kFormatter(
                 user.totalCommits,
