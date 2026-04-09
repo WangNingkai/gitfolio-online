@@ -1,4 +1,4 @@
-const { escapeHtml, kFormatter, clampValue, parseBoolean, sanitizeUrl, CONSTANTS } = require('../src/utils')
+import { escapeHtml, kFormatter, clampValue, parseBoolean, sanitizeUrl, CONSTANTS } from '../src/lib/utils'
 
 describe('utils', () => {
   describe('escapeHtml', () => {
@@ -19,12 +19,12 @@ describe('utils', () => {
     })
 
     it('should handle null and undefined', () => {
-      expect(escapeHtml(null)).toBe('null')
+      expect(escapeHtml(null as any)).toBe('null')
       expect(escapeHtml(undefined)).toBe('')
     })
 
     it('should handle numbers', () => {
-      expect(escapeHtml(123)).toBe('123')
+      expect(escapeHtml(123 as any)).toBe('123')
     })
   })
 
@@ -79,8 +79,8 @@ describe('utils', () => {
 
     it('should return value as is for other inputs', () => {
       expect(parseBoolean('yes')).toBe('yes')
-      expect(parseBoolean(1)).toBe(1)
-      expect(parseBoolean(null)).toBe(null)
+      expect(parseBoolean(1 as any)).toBe(1)
+      expect(parseBoolean(null as any)).toBe(null)
       expect(parseBoolean(undefined)).toBe(undefined)
     })
   })

@@ -1,5 +1,4 @@
 {
-  "version": 2,
   "headers": [
     {
       "source": "/(.*)",
@@ -36,18 +35,14 @@
       ]
     }
   ],
-  "routes": [
+  "rewrites": [
     {
-      "src": "/",
-      "dest": "/api/index.js?username=wangningkai"
+      "source": "/user/:username*",
+      "destination": "/:username*"
     },
     {
-      "src": "/user/(?<username>[^/]*)",
-      "dest": "/api/index.js?username=$username"
-    },
-    {
-      "src": "/u/(?<username>[^/]*)",
-      "dest": "/api/index.js?username=$username"
+      "source": "/u/:username*",
+      "destination": "/:username*"
     }
   ]
 }

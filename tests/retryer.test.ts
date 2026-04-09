@@ -1,12 +1,4 @@
-const retryer = require('../src/retryer')
-
-// Mock the utils logger
-jest.mock('../src/utils', () => ({
-  logger: {
-    log: jest.fn(),
-    error: jest.fn(),
-  },
-}))
+import { retryer } from '../src/lib/github'
 
 describe('retryer', () => {
   const originalEnv = process.env

@@ -1,8 +1,15 @@
 module.exports = {
-  testEnvironment: 'jsdom',
-  transformIgnorePatterns: ['node_modules/(?!(jsdom)/)'],
+  testEnvironment: 'node',
+  transform: {
+    '^.+\\.(ts|tsx)$': [
+      'ts-jest',
+      {
+        tsconfig: 'tsconfig.test.json',
+      },
+    ],
+  },
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
   },
-  testMatch: ['**/tests/**/*.test.js'],
+  testMatch: ['**/tests/**/*.test.(js|ts)'],
 }

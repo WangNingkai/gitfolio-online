@@ -6,48 +6,57 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ```bash
 # Install dependencies
-npm install
+pnpm install
 
-# Start development server with hot reload
-npm run dev
+# Start development server (Turbopack)
+pnpm dev
+
+# Production build
+pnpm build
 
 # Run tests
-npm test
+pnpm test
 
 # Run single test file
-npm test -- tests/render.test.js
-
-# Lint code
-npx eslint src/ api/
+pnpm test -- tests/utils.test.ts
 ```
 
 ## Architecture
 
-Gitfolio Online is a Vercel serverless function that generates GitHub portfolio pages on-the-fly.
+Gitfolio Online is a Next.js App Router application that generates GitHub portfolio pages for any GitHub user.
 
 ### Data Flow
 
 ```
-Request → api/index.js → src/fetch.js → GitHub GraphQL API
-                              ↓
-                         src/retryer.js (token rotation)
-                              ↓
-                         src/render.js → HTML output
+Request → /[username]/page.tsx (Server Component)
+              → lib/github.ts → GitHub GraphQL API
+              → lib/theme.ts → Theme CSS injection
+              → React Components → HTML output
 ```
 
 ### Core Modules
 
 | File | Purpose |
 |------|---------|
-| `api/index.js` | Vercel entry point, handles HTTP requests |
-| `src/fetch.js` | GitHub GraphQL API queries, fetches user + repo data |
-| `src/retryer.js` | Token rotation logic (PAT_1~PAT_8), handles rate limits |
-| `src/render.js` | Handlebars template rendering, generates final HTML |
-| `src/utils.js` | Shared utilities (request, logger, formatters) |
+| `src/app/[username]/page.tsx` | Dynamic route Server Component, fetches data and renders page |
+| `src/app/layout.tsx` | Root layout with fonts, global CSS, CDN resources |
+| `src/lib/github.ts` | GitHub GraphQL API client with token rotation (PAT_1~PAT_8) |
+| `src/lib/theme.ts` | Theme resolution (auto/dark/light/dracula) and CSS injection |
+| `src/lib/utils.ts` | Utility functions (escapeHtml, sanitizeUrl, kFormatter, etc.) |
+| `src/lib/colors.ts` | Language color mappings (250+ colors) |
+
+### Components
+
+| Component | Purpose |
+|-----------|---------|
+| `components/profile-panel.tsx` | Left panel: avatar, bio, followers, stars, etc. |
+| `components/project-card.tsx` | Single repository card with language color dot |
+| `components/project-grid.tsx` | Renders Work and Forks sections with card grid |
+| `components/github-corner.tsx` | SVG GitHub corner widget |
 
 ### Theming
 
-Themes are CSS files in `assets/themes/`. Each theme defines CSS variables and overrides. The `auto.css` theme uses `prefers-color-scheme` media query.
+Themes are resolved via `lib/theme.ts` and injected as inline `<style>` tags. The base styles live in `src/styles/globals.css`. Theme CSS files in `src/styles/themes/` provide per-theme overrides.
 
 ### Token Configuration
 
@@ -55,8 +64,8 @@ Requires `PAT_1` environment variable (GitHub Personal Access Token). Supports P
 
 ## Testing
 
-Tests use Jest with jsdom environment. Test files in `tests/` directory.
+Tests use Jest with ts-jest. Test files are `tests/*.test.ts`.
 
 ## Deployment
 
-Deployed to Vercel. The `vercel.json` configures routing and caching headers.
+Deployed to Vercel. `vercel.json` configures rewrites for `/u/:username` and `/:username` routes.
