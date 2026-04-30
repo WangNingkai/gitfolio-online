@@ -23,7 +23,7 @@ fragment RepoInfo on Repository {
     color
     id
     name
-  }  
+  }
   stargazers {
     totalCount
   }
@@ -115,7 +115,7 @@ const fetchInfo = async (username, repoNum) => {
   if (!username) throw Error('Invalid username')
   const numRepoNum = repoNum ? Number(repoNum) : 30
   const totalCommitsPromise = Promise.race([
-    totalCommitsFetcher(username),
+    totalCommitsFetcher(username).catch(() => 0),
     new Promise((resolve) => setTimeout(() => resolve(0), TOTAL_COMMITS_TIMEOUT_MS)),
   ])
 

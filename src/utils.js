@@ -81,6 +81,7 @@ const request = (data, headers) => {
     method: 'post',
     headers,
     data,
+    timeout: 10000,
   })
 }
 
@@ -96,7 +97,12 @@ const CONSTANTS = {
  */
 const sanitizeUrl = (url) => {
   if (!url) return ''
-  return /^https?:\/\//.test(url) ? url : ''
+  try {
+    const parsed = new URL(url)
+    return ['http:', 'https:'].includes(parsed.protocol) ? url : ''
+  } catch {
+    return ''
+  }
 }
 
 /**

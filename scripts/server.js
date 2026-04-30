@@ -7,9 +7,9 @@ const PORT = process.env.SERVER_PORT || process.env.PORT || 4000
 
 // Check for GitHub Token
 if (!process.env.PAT_1) {
-  console.warn('\x1b[33m%s\x1b[0m', '⚠️  WARNING: PAT_1 is not set in your environment variables.')
-  console.warn('\x1b[33m%s\x1b[0m', '   Please create a .env file based on .env.example and set your GitHub Token.')
-  console.warn('\x1b[33m%s\x1b[0m', '   Requests to GitHub API will likely fail without authentication.\n')
+  console.error('\x1b[31m%s\x1b[0m', '❌ FATAL: PAT_1 is not set in your environment variables.')
+  console.error('\x1b[31m%s\x1b[0m', '   Please create a .env file based on .env.example and set your GitHub Token.')
+  process.exit(1)
 } else {
   console.log('\x1b[32m%s\x1b[0m', '✓ GitHub Token (PAT_1) loaded successfully.\n')
 }

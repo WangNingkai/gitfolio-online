@@ -1,7 +1,7 @@
 const path = require('path')
 const hbs = require('handlebars')
 const fs = require('fs')
-const { kFormatter, renderGithub, escapeHtml, sanitizeUrl } = require('../src/utils')
+const { kFormatter, renderGithub, escapeHtml, sanitizeHtml, sanitizeUrl } = require('../src/utils')
 
 const LANGUAGE_COLORS = require('./language-colors.json')
 
@@ -48,14 +48,15 @@ const getThemeTemplate = (theme) => {
 
 const renderProjectCard = (repo) => {
   const languageColor = repo.primaryLanguage ? getLanguageColor(repo.primaryLanguage.name) : null
-  return `<a href="${repo.url}" target="_blank"><section><div class="section_title">${escapeHtml(repo.name)}</div><div class="about_section"><span style="display:${repo.shortDescriptionHTML ? 'block' : 'none'};">${repo.shortDescriptionHTML || ''}</span></div><div class="bottom_section"><span class="lang-tag" style="display:${repo.primaryLanguage == null ? 'none' : 'inline-flex'};"><span class="lang-dot" style="background:${languageColor}"></span>${repo.primaryLanguage == null ? '' : escapeHtml(repo.primaryLanguage.name)}</span><span><i class="fas fa-star"></i>&nbsp;${kFormatter(repo.stargazers.totalCount)}</span><span><i class="fas fa-code-branch"></i>&nbsp;${kFormatter(repo.forkCount)}</span></div></section></a>`
+  const safeDesc = sanitizeHtml(repo.shortDescriptionHTML || '')
+  return `<a href="${escapeHtml(repo.url)}" target="_blank"><section><div class="section_title">${escapeHtml(repo.name)}</div><div class="about_section"><span style="display:${safeDesc ? 'block' : 'none'};">${safeDesc}</span></div><div class="bottom_section"><span class="lang-tag" style="display:${repo.primaryLanguage == null ? 'none' : 'inline-flex'};"><span class="lang-dot" style="background:${languageColor}"></span>${repo.primaryLanguage == null ? '' : escapeHtml(repo.primaryLanguage.name)}</span><span><i class="fas fa-star"></i>&nbsp;${kFormatter(repo.stargazers.totalCount)}</span><span><i class="fas fa-code-branch"></i>&nbsp;${kFormatter(repo.forkCount)}</span></div></section></a>`
 }
 
 const renderInfo = async (info, args = {}) => {
   const { theme, includeFork } = args
   const activeTheme = resolveTheme(theme)
   const user = info
-  const repos = user.repositories.nodes
+  const repos = user?.repositories?.nodes || []
 
   let workSectionHtml = ''
   let forksSectionHtml = ''
@@ -82,12 +83,11 @@ const renderInfo = async (info, args = {}) => {
   const nameDisplay = user.name == null || !user.name ? 'none' : 'block'
   const usernameHtml = `<span style="display:${nameDisplay};">${escapeHtml(user.name || '')}</span><a href="${escapeHtml(user.url)}">@${escapeHtml(user.login)}</a>`
   const userbioDisplay = user.bioHTML == null || !user.bioHTML ? 'none' : 'block'
-  const userbioHtml = `<div style="display:${userbioDisplay};">${user.bioHTML}</div>`
+  const userbioHtml = `<div style="display:${userbioDisplay};">${sanitizeHtml(user.bioHTML || '')}</div>`
   const aboutHtml = `<span style="display:${user.followers == null || !user.followers ? 'none' : 'block'};"><i class="fas fa-users"></i> &nbsp;${kFormatter(user.followers.totalCount)} followers · ${kFormatter(user.following.totalCount)} following</span>
 <span style="display:block"><i class="fas fa-star"></i> &nbsp;${stars} stars</span>
 <span style="display:block"><i class="fas fa-history"></i> &nbsp;${kFormatter(user.totalCommits)} commits</span>
 <span style="display:${user.company == null || !user.company ? 'none' : 'block'};"><i class="fas fa-building"></i> &nbsp;${escapeHtml(user.company || '')}</span>
-<span style="display:${user.email == null || !user.email ? 'none' : 'block'};"><i class="fas fa-envelope"></i> &nbsp;${escapeHtml(user.email || '')}</span>
 <span style="display:${user.websiteUrl == null || !user.websiteUrl ? 'none' : 'block'};"><i class="fas fa-link"></i> &nbsp;<a href="${escapeHtml(sanitizeUrl(user.websiteUrl))}">${escapeHtml(user.websiteUrl || '')}</a></span>
 <span style="display:${user.location == null || !user.location ? 'none' : 'block'};"><i class="fas fa-map-marker-alt"></i> &nbsp;${escapeHtml(user.location || '')}</span>
 <span style="display:${user.isHireable == false || !user.isHireable ? 'none' : 'block'};"><i class="fas fa-user-tie"></i> &nbsp;Available for hire</span>`
